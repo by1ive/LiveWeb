@@ -1,41 +1,133 @@
 <script setup lang="ts">
-import ViteInfo from '../components/HomeView/ViteInfo.vue'
-import ViteList from '../components/HomeView/LinkList.vue'
+import DocIcon from "../icons/HomePage/IconDoc.vue"
+import IconTool from "../icons/HomePage/IconTool.vue"
+import AboutIcon from "../icons/HomePage/IconAbout.vue"
+import ViteIcon from  "../icons/HomePage/IconVite.vue"
+import LinkItem from "../PageItems/HomePage/LinkItem.vue"
+import ViteInfo from "../PageItems/HomePage/ViteInfo.vue"
 
-const infoMsg = "Dev Helper, A resource integration website!";
+//PageInfo
+const viteInfo = {
+  logo : ViteIcon,
+  info : "Dev Helper, A resource integration website!"
+}
+
+const linkObjAarry = [
+    {
+        path : "/doc",
+        name : "Doc",
+        Icon : DocIcon,
+        info : "DocPage for learn!",
+    },
+    {
+        path : "/tool",
+        name : "Tool",
+        Icon : IconTool,
+        info : "ToolPage for develop!",
+    },
+    {
+        path : "/about",
+        name : "About",
+        Icon : AboutIcon,
+        info : "AboutPage for vite!",
+    }
+  ];
+
 </script>
 
 <template>
-  <main>
-    <div class="show-vite">
-      <ViteInfo :msg=infoMsg></ViteInfo>
+  <div class="home">
+    <div class="head">
+
     </div>
-    <div class="show-list">
-      <ViteList></ViteList>
+    <div class="middle">
+        <div class="vite">
+          <ViteInfo>
+            <template #logo><component :is='viteInfo.logo'></component></template>
+              <template #info>{{ viteInfo.info }}</template>
+          </ViteInfo>
+        </div>
+        <div class="list">
+          <div v-for="item in linkObjAarry" :key="item.name">
+            <LinkItem>
+              <template #icon><component :is='item.Icon'></component></template>
+              <template #heading><RouterLink :to=item.path>{{ item.name }}</RouterLink></template>
+              <template #info>{{ item.info }}</template>
+            </LinkItem>
+          </div>
+        </div>
+      </div>
+    <div class="bottom">
+
     </div>
-  </main>
+  </div>
 </template>
 
 
 <style scoped>
-main {
-  line-height: 1.5;
-  min-height: 100vh;
+.home{
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  padding: 2rem;
+  grid-template-rows: 1fr 4fr 1fr;
+  min-height: 100vh;
   align-items: center;
+  justify-items: center;
 }
 
-.show-vite{
+.middle{
+  padding: 2rem;
+  width: 60%;
+  height: 80%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 3fr 2fr;
+  border: 3px solid rgb(228, 141, 155);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-clip: content-box;
+  min-width: 900px;
+}
+
+.vite{
   display:flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 100%;
+  border: 2px pink;
+  border-style: none solid  none none;
 }
 
-.show-list{
-  margin: 0 auto;
-  width: 80%;
+.list{
+  display: grid;
+  align-items: center;
 }
 
+a  {
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+}
+
+a:hover::after {
+  background: linear-gradient(to right, rgb(216, 22, 200), blue);
+  animation: slideIn 0.5s linear forwards;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+}
+
+@keyframes slideIn {
+  0% {
+    width: 0;
+    margin-left: 0;
+  }
+  100% {
+    width: 100%;
+    margin-left: 0;
+  }
+}
 </style>
