@@ -68,7 +68,7 @@ const linkObjAarry = [
 .home{
   display: grid;
   grid-template-rows: 1fr 4fr 1fr;
-  min-height: 100vh;
+  height: 100%;
   align-items: center;
   justify-items: center;
 }
