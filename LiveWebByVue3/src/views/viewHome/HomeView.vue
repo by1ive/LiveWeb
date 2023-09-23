@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import DocIcon from "../icons/HomePage/IconDoc.vue"
-import IconTool from "../icons/HomePage/IconTool.vue"
-import AboutIcon from "../icons/HomePage/IconAbout.vue"
-import ViteIcon from  "../icons/HomePage/IconVite.vue"
-import LinkItem from "../PageItems/HomePage/LinkItem.vue"
-import ViteInfo from "../PageItems/HomePage/ViteInfo.vue"
+import DocIcon from "./icons/IconDoc.vue"
+import IconTool from "./icons/IconTool.vue"
+import AboutIcon from "./icons/IconAbout.vue"
+import ViteIcon from  "./icons/IconVite.vue"
+import LinkItem from "./items/LinkItem.vue"
+import ViteInfo from "./items/ViteInfo.vue"
 
 //PageInfo
 const viteInfo = {

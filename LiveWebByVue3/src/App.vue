@@ -7,7 +7,7 @@
       <router-view></router-view>
     </div>
     <div class="show-author">
-      <p>Powered by<a href="https://github.com/LiveWeb">@By1ive</a></p>
+      <p>Made by ❤️<a href="https://github.com/LiveWeb">&nbsp;@By1ive</a></p>
     </div>
   </main>
 </template>
@@ -36,7 +36,7 @@ main{
   justify-items: center;
 }
 .show-author p{
-  font-size: 1.25rem;
+  font-size: 1rem;
   position: absolute;
   right: 0;
   margin-right: calc(50% - 120px);
