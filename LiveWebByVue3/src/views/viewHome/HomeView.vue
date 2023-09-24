@@ -1,37 +1,14 @@
 <script setup lang="ts">
-import DocIcon from "./icons/IconDoc.vue"
-import IconTool from "./icons/IconTool.vue"
-import AboutIcon from "./icons/IconAbout.vue"
-import ViteIcon from  "./icons/IconVite.vue"
-import LinkItem from "./items/LinkItem.vue"
-import ViteInfo from "./items/ViteInfo.vue"
+import LinkItem from "./items/LinkItem.vue";
+import ViteInfo from "./items/ViteInfo.vue";
+import ViteIcon from  "./icons/IconVite.vue";
+import HomeRouter from "@/views/viewHome/router/HomeRouter.js";
 
 //PageInfo
 const viteInfo = {
   logo : ViteIcon,
   info : "Dev Helper, A resource integration website!"
 }
-
-const linkObjAarry = [
-    {
-        path : "/doc",
-        name : "Doc",
-        Icon : DocIcon,
-        info : "DocPage for learn!",
-    },
-    {
-        path : "/tool",
-        name : "Tool",
-        Icon : IconTool,
-        info : "ToolPage for develop!",
-    },
-    {
-        path : "/about",
-        name : "About",
-        Icon : AboutIcon,
-        info : "AboutPage for vite!",
-    }
-  ];
 
 </script>
 
@@ -44,11 +21,11 @@ const linkObjAarry = [
         <div class="vite">
           <ViteInfo>
             <template #logo><component :is='viteInfo.logo'></component></template>
-              <template #info>{{ viteInfo.info }}</template>
+            <template #info>{{ viteInfo.info }}</template>
           </ViteInfo>
         </div>
         <div class="list">
-          <div v-for="item in linkObjAarry" :key="item.name">
+          <div v-for="item in HomeRouter" :key="item.name">
             <LinkItem>
               <template #icon><component :is='item.Icon'></component></template>
               <template #heading><RouterLink :to=item.path>{{ item.name }}</RouterLink></template>
