@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import homeRouter from "@/views/viewHome/router/HomeRouter.js";
+import homeRouter from '@/views/viewHome/router/HomeRouter.js'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,28 +12,23 @@ const router = createRouter({
   ]
 })
 
-
-
 router.beforeEach(async (to, from, next) => {
-  next();
+  next()
 })
 
-
-
 function routerListGet(routerList: any, type: string) {
-  if(type === 'level1')
-  {
+  if (type === 'level1') {
     for (let i = 0; i < homeRouter.length; i++) {
       const sigRouter = {
         path: homeRouter[i].path,
         name: homeRouter[i].name,
-        component : homeRouter[i].component
-      };
-      router.addRoute(sigRouter);
+        component: homeRouter[i].component
+      }
+      router.addRoute(sigRouter)
     }
-  } 
+  }
 }
 
-routerListGet(homeRouter, 'level1');
+routerListGet(homeRouter, 'level1')
 
 export default router

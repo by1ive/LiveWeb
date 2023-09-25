@@ -1,45 +1,50 @@
 <script setup lang="ts">
-import LinkItem from "./items/LinkItem.vue";
-import ViteInfo from "./items/ViteInfo.vue";
-import ViteIcon from  "./icons/IconVite.vue";
-import HomeRouter from "@/views/viewHome/router/HomeRouter.js";
+import LinkItem from './items/LinkItem.vue'
+import ViteInfo from './items/ViteInfo.vue'
+import ViteIcon from './icons/IconVite.vue'
+import HomeRouter from '@/views/viewHome/router/HomeRouter.js'
 
 //PageInfo
 const viteInfo = {
-  logo : ViteIcon,
-  info : "Dev Helper, A resource integration website!"
+  logo: ViteIcon,
+  info: 'Dev Helper, A resource integration website!'
 }
-
 </script>
 
 <template>
-<div class="home">
-  <div class="home-vite">
-    <div class="vite-info">
-      <ViteInfo>
-        <template #logo><component :is='viteInfo.logo'></component></template>
-        <template #info>{{ viteInfo.info }}</template>
-      </ViteInfo>
-    </div>
-    <div class="link-list">
-      <div v-for="item in HomeRouter" :key="item.name">
-        <LinkItem>
-          <template #icon><component :is='item.icon'></component></template>
-          <template #heading><RouterLink :to=item.path>{{ item.name }}</RouterLink></template>
-          <template #info>{{ item.info }}</template>
-        </LinkItem>
+  <div class="home">
+    <div class="home-vite">
+      <div class="vite-info">
+        <ViteInfo>
+          <template #logo>
+            <component :is="viteInfo.logo"></component>
+          </template>
+          <template #info>{{ viteInfo.info }}</template>
+        </ViteInfo>
+      </div>
+      <div class="link-list">
+        <div v-for="item in HomeRouter" :key="item.name">
+          <LinkItem>
+            <template #icon>
+              <component :is="item.icon"></component>
+            </template>
+            <template #heading>
+              <RouterLink :to="item.path">{{ item.name }}</RouterLink>
+            </template>
+            <template #info>{{ item.info }}</template>
+          </LinkItem>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="show">
+    <div class="show">
       <p>Made by ❤️<a href="https://github.com/LiveWeb">&nbsp;@By1ive</a></p>
+    </div>
   </div>
-</div>
 </template>
 
 
 <style scoped>
-.home{
+.home {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +53,8 @@ const viteInfo = {
   flex-direction: column;
   flex-wrap: wrap;
 }
-.home-vite{
+
+.home-vite {
   padding: 2rem;
   width: 60%;
   height: 50%;
@@ -63,22 +69,22 @@ const viteInfo = {
   min-width: 900px;
 }
 
-.vite-info{
-  display:flex;
+.vite-info {
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
   border: 2px pink;
-  border-style: none solid  none none;
+  border-style: none solid none none;
 }
 
-.link-list{
+.link-list {
   display: grid;
   align-items: center;
 }
 
-.show{
+.show {
   position: relative;
   display: flex;
   align-items: center;
@@ -86,14 +92,15 @@ const viteInfo = {
   height: 100px;
   width: 100%;
 }
-.show p{
+
+.show p {
   font-size: 1rem;
   position: absolute;
   right: 0;
   margin-right: calc(50% - 120px);
 }
 
-a  {
+a {
   font-size: 1.25rem;
   margin-bottom: 0.4rem;
   font-weight: bold;
@@ -102,7 +109,7 @@ a  {
 a:hover::after {
   background: linear-gradient(to right, rgb(216, 22, 200), blue);
   animation: slideIn 0.5s linear forwards;
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -115,9 +122,9 @@ a:hover::after {
     width: 0;
     margin-left: 0;
   }
+
   100% {
     width: 100%;
     margin-left: 0;
   }
-}
-</style>
+}</style>

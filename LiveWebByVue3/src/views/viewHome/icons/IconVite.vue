@@ -4,8 +4,8 @@
         <defs node-id="56">
             <filter id="noise" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox"
                 primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
-                <feTurbulence id="select" type="turbulence" baseFrequency="0 0.1" numOctaves="2" seed="2" stitchTiles="stitch"
-                    x="0%" y="0%" width="100%" height="100%" result="turbulence" />
+                <feTurbulence id="select" type="turbulence" baseFrequency="0 0.1" numOctaves="2" seed="2"
+                    stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence" />
                 <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="20" xChannelSelector="R" yChannelSelector="B"
                     x="0%" y="0%" width="100%" height="100%" result="displacementMap" />
             </filter>
@@ -215,5 +215,6 @@
         <path
             d="M 753.50 650.70 C 753.50 655.67 749.47 659.70 744.50 659.70 C 739.53 659.70 735.50 655.67 735.50 650.70 C 735.50 645.73 739.53 641.70 744.50 641.70 C 749.47 641.70 753.50 645.73 753.50 650.70 Z"
             fill="#c5a47a" fill-rule="nonzero" node-id="164" stroke="none" target-height="18" target-width="18"
-        target-x="735.5" target-y="641.7" />
-</svg></template>
+            target-x="735.5" target-y="641.7" />
+    </svg>
+</template>
