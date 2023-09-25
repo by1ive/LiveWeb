@@ -3,7 +3,6 @@
 import { gsap } from 'gsap';
 import { onMounted } from 'vue';
 
-
 onMounted(() => {
     const tur = document.querySelector('feTurbulence');
     const val = {

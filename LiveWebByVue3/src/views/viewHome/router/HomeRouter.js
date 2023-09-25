@@ -9,21 +9,21 @@ const homeRouter = [
     {
         path : "/doc",
         name : "Doc",
-        Icon : DocIcon,
+        icon : DocIcon,
         component: DocView,
         info : "DocPage for learn!",
     },
     {
         path : "/tool",
         name : "Tool",
-        Icon : IconTool,
+        icon : IconTool,
         component: ToolView,
         info : "ToolPage for develop!",
     },
     {
         path : "/about",
         name : "About",
-        Icon : AboutIcon,
+        icon : AboutIcon,
         component: AboutView,
         info : "AboutPage for vite!",
     }

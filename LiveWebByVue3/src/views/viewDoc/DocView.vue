@@ -1,24 +1,31 @@
 <script setup lang="ts">
 import SearchIcon from "./icons/IconSearch.vue";
-import searchItem from "./items/SearchItem.vue";
+import SearchItem from "./items/SearchItem.vue";
+import CategoryItem from "./items/CategoryItem.vue";
 import DocRouter from "@/views/viewDoc/router/DocRouter.js";
 import {ref} from "vue";
 
+//输入逻辑
 const searchShow = ref(false);
-const searchList = new Array();
-const inputValue = ref("");
+let searchList = new Array();
+let inputValue:string = '';
+let categoryLen = Object.keys(DocRouter).length;
 const showSearchList = (event : any) => {
-  inputValue.value = event.target.value;
+  inputValue = event.target.value;
   searchShow.value = false;
-  searchList.splice(0, searchList.length);
-  if (inputValue.value === '' || DocRouter.length <= 0) {
+  searchList = [];
+  if (inputValue === '' || categoryLen <= 0) {
     return;
   }
-  for (let i = 0; i < DocRouter.length; i++) {
-    if (DocRouter[i].title.includes(inputValue.value)) {
-      searchList.push(DocRouter[i]);
-    }
-  }
+
+  Object.values(DocRouter).forEach((cItem: any) => {
+    cItem.info.forEach((rItem: any) => {
+      if (rItem.title.includes(inputValue)) {
+        searchList.push(rItem);
+      }
+    })
+  });
+
   if (searchList.length === 0) {
     return;
   }
@@ -32,30 +39,29 @@ const highlightText = (text: any, keyword: any) =>{
 </script>
 
 <template>
-    <div class="doc">
-      <div class="doc-search">
-        <div class="search-button">
-          <label><component :is="SearchIcon"></component></label>
-          <input type="text" placeholder="Search docs" autocomplete="off" @input="showSearchList($event)"/>
-        </div>
-        <div class="search-show" v-show="searchShow">
-          <div class="search-list" v-for="item in searchList" :key="item.title">
-            <searchItem>
-              <template #info>
-                <RouterLink :to="item.path"><span v-html="highlightText(item.title, inputValue)"></span></RouterLink>
-              </template>
-            </searchItem>
-          </div>
-        </div>
+  <div class="doc">
+    <div class="doc-search">
+      <div class="search-button">
+        <label><component :is="SearchIcon"></component></label>
+        <input type="text" placeholder="Search docs" autocomplete="off" @input="showSearchList($event)"/>
       </div>
-      <div class="doc-page">
-
+      <div class="search-show" v-show="searchShow">
+        <div class="search-list" v-for="item in searchList" :key="item.title">
+          <SearchItem>
+            <template #info>
+              <a :href="item.path"><span v-html="highlightText(item.title, inputValue)" :title="item.title"></span></a>
+            </template>
+          </SearchItem>
+        </div>
       </div>
     </div>
+    <div class="doc-page">
+        <CategoryItem></CategoryItem>
+    </div>
+  </div>
 </template>
   
 <style scoped>
-
 *{
   white-space: nowrap; /* 禁止换行 */
   overflow: hidden; /* 隐藏溢出内容 */
@@ -65,12 +71,19 @@ const highlightText = (text: any, keyword: any) =>{
 
 .doc{
   position: relative;
-  display: flex;
+  padding: 0px 4rem 0px 4rem;
 }
+
 .doc-search{
-  flex: auto;
   margin: 20px 0 20px 0;
   position: relative;
+}
+
+.doc-page{
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .search-button{
@@ -81,14 +94,16 @@ const highlightText = (text: any, keyword: any) =>{
   display: flex;
   padding: 0 10px 0 10px;
   border-radius: var(--v);
-  border: 2px solid rgb(228, 141, 155);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgb(240, 210, 215);
+}
+.search-button:hover{
+  border: 2px solid pink;
 }
 
 .search-button label{
   display: flex;
   align-items: center;
-  justify-items:center;
+  justify-items: center;
 }
 
 .search-button input{
@@ -114,24 +129,22 @@ const highlightText = (text: any, keyword: any) =>{
   padding: 2px 8px 2px 8px;
 }
 
-.el-checkbox-group {
-  display: grid;
-  justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, 200px);
-  grid-gap: 10px;
+span[title] {
+  position: relative;
+  cursor: pointer;
 }
 
-.el-checkbox {
-  width: 200px;
-  background-color: skyblue;
-  margin-top: 5px;
+span[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
-@media (min-width: 1024px) {
-  .doc-search{
-    width: var(--item-div);
-  }
-
-}
 </style>
   

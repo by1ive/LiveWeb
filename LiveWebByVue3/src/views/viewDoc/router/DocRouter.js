@@ -1,27 +1,54 @@
+import WebIcon from "@/views/viewDoc/icons/IconWeb.vue";
 
-import ToolView from '@/views/viewTool/ToolView.vue';
-import AboutView from '@/views/viewAbout/AboutView.vue';
-import DocIcon from "@/views/viewHome/icons/IconDoc.vue";
-import IconTool from "@/views/viewHome/icons/IconTool.vue";
-import AboutIcon from "@/views/viewHome/icons/IconAbout.vue";
-
-const DocRouter = [
-    {
-        path : "/tool11",
-        name : "Tool111",
-        Icon : IconTool,
-        component: ToolView,
-        info : "ToolPage for develop!",
-        title: "1111111111111111111111111111111111111111111111111111111111111111111111111"
+const DocRouter = {
+    "Web Devloper":{
+        info:
+            [
+                {
+                    path : "/tool11",
+                    title: "Nginx Setup for Web",
+                    author: "bwli",
+                    date: "2022-01-01"
+                },
+                {
+                    path : "/tool11",
+                    title: "1111111111111111111111111111111111111111111111111111111111111111111111111",
+                    author: "bwli"
+                },
+                {
+                    path : "/tool11",
+                    title: "1111111111111111111111111111111111111111111111111111111111111111111111111",
+                    author: "bwli"
+                },
+                {
+                    path : "/tool11",
+                    title: "1111111111111111111111111111111111111111111111111111111111111111111111111",
+                    author: "bwli"
+                },
+                {
+                    path : "/tool11",
+                    title: "1111111111111111111111111111111111111111111111111111111111111111111111111",
+                    author: "bwli"
+                }
+            ],
+        icon: WebIcon        
     },
-    {
-        path : "/about111",
-        name : "About111",
-        Icon : AboutIcon,
-        component: AboutView,
-        info : "AboutPage for vite!",
-        title: "1222"
+    "HTML Devloper":{
+        info:
+        [
+            {
+                path : "/tool11",
+                title: "1111111111111111111111111111111111111111111111111111111111111111111111111",
+                author: "bwli"
+            },
+            {
+                path : "/tool11",
+                title: "1111111111111111111111111111111111111111111111111111111111111111111111111",
+                author: "bwli"
+            }
+        ],
+        icon: WebIcon    
     }
-  ];
+}
 
 export default DocRouter;

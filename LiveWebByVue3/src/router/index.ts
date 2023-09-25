@@ -21,7 +21,7 @@ router.beforeEach(async (to, from, next) => {
 
 
 function routerListGet(routerList: any, type: string) {
-  if(type === 'father')
+  if(type === 'level1')
   {
     for (let i = 0; i < homeRouter.length; i++) {
       const sigRouter = {
@@ -34,6 +34,6 @@ function routerListGet(routerList: any, type: string) {
   } 
 }
 
-routerListGet(homeRouter, 'father');
+routerListGet(homeRouter, 'level1');
 
 export default router
