@@ -2,33 +2,43 @@
 import SearchItem from '@/views/viewDoc/items/SearchItem.vue';
 import CategoryItem from '@/views/viewDoc/items/CategoryItem.vue';
 import DocItem from '@/views/viewDoc/items/DocItem.vue';
-import { ref } from 'vue';
-
-interface docInfo {
-    path : string;
-    type : string;
-  }
+import { ref, watch } from 'vue';
 
 const linkPath = ref('');
-const getPath = (path : string) => {
+const getPath = (path: string) => {
   linkPath.value = path;
+};
+
+interface docInfo {
+  path: string;
+  type: string;
 }
 
-const pathTypeCheck = (path : string) => {
-  let info : docInfo = {
-    path : '',
-    type : ''
-  }
+const docInfo = ref<docInfo>({
+  path: '',
+  type: '',
+});
+
+const pathTypeCheck = (path: string) => {
+  let info: docInfo = {
+    path: '',
+    type: '',
+  };
   if (path.endsWith('.md')) {
     info.path = path;
     info.type = '.md';
   }
   return info;
-}
+};
+
+watch(linkPath, (newValue) => {
+  docInfo.value = pathTypeCheck(newValue);
+});
+
 </script>
 
 <template>
-  <div class="doc" v-if="linkPath == ''">
+  <div class="doc" v-if="linkPath === ''">
     <div class="doc-search">
       <SearchItem :jump2doc="getPath"></SearchItem>
     </div>
@@ -36,9 +46,9 @@ const pathTypeCheck = (path : string) => {
       <CategoryItem :jump2doc="getPath"></CategoryItem>
     </div>
   </div>
-  <DocItem :docInfo="pathTypeCheck(linkPath)" v-if="linkPath != ''"></DocItem>
+  <DocItem :info="docInfo" v-if="linkPath !== ''"></DocItem>
 </template>
-  
+
 <style scoped>
 * {
   white-space: nowrap;
