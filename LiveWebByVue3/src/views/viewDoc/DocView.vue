@@ -1,36 +1,55 @@
 <script setup lang="ts">
 import SearchItem from '@/views/viewDoc/items/SearchItem.vue';
 import CategoryItem from '@/views/viewDoc/items/CategoryItem.vue';
-
+import DocItem from '@/views/viewDoc/items/DocItem.vue';
 import { ref } from 'vue';
+
+interface docInfo {
+    path : string;
+    type : string;
+  }
+
+const linkPath = ref('');
+const getPath = (path : string) => {
+  linkPath.value = path;
+}
+
+const pathTypeCheck = (path : string) => {
+  let info : docInfo = {
+    path : '',
+    type : ''
+  }
+  if (path.endsWith('.md')) {
+    info.path = path;
+    info.type = '.md';
+  }
+  return info;
+}
 </script>
 
 <template>
-  <div class="doc" v-show="true">
+  <div class="doc" v-if="linkPath == ''">
     <div class="doc-search">
-      <SearchItem></SearchItem>
+      <SearchItem :jump2doc="getPath"></SearchItem>
     </div>
     <div class="doc-page">
-      <CategoryItem></CategoryItem>
+      <CategoryItem :jump2doc="getPath"></CategoryItem>
     </div>
   </div>
-  <div>
-  </div>
+  <DocItem :docInfo="pathTypeCheck(linkPath)" v-if="linkPath != ''"></DocItem>
 </template>
   
 <style scoped>
 * {
   white-space: nowrap;
-  /* 禁止换行 */
   overflow: hidden;
-  /* 隐藏溢出内容 */
   text-overflow: ellipsis;
   color: black;
 }
 
 .doc {
-  --v: 50px;
-  --r: 0 4rem 0 4rem;
+  --v: 30px;
+  --r: 0 3rem 0 3rem;
   position: relative;
   padding: var(--r);
 }

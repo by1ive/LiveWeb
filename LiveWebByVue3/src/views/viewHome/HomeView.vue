@@ -36,7 +36,7 @@ const viteInfo = {
         </div>
       </div>
     </div>
-    <div class="show">
+    <div class="home-show">
       <p>Made by ❤️<a href="https://github.com/LiveWeb">&nbsp;@By1ive</a></p>
     </div>
   </div>
@@ -84,16 +84,17 @@ const viteInfo = {
   align-items: center;
 }
 
-.show {
+.home-show {
   position: relative;
   display: flex;
   align-items: center;
   justify-items: center;
-  height: 100px;
+  height: 50px;
   width: 100%;
+  margin-top: 50px;
 }
 
-.show p {
+.home-show p {
   font-size: 1rem;
   position: absolute;
   right: 0;

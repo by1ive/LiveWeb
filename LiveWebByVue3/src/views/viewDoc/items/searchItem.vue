@@ -35,6 +35,13 @@ const highlightText = (text: any, keyword: any) => {
   const regex = new RegExp(keyword, 'i');
   return text.replace(regex, '<span style="color:rgb(58, 223, 58)">$&</span>');
 }
+
+defineProps({
+  jump2doc: {
+    type: Function,
+    default: () => {},
+  },
+})
 </script>
 
 <template>
@@ -46,9 +53,9 @@ const highlightText = (text: any, keyword: any) => {
   </div>
   <div class="search-show" v-show="searchShow">
     <div class="search-list">
-      <div class="search-item" v-for="item in searchList" :key="item.title">
-        <div class="item-info">
-          <a :href="item.path"><span v-html="highlightText(item.title, inputValue)" :title="item.title"></span></a>
+      <div class="search-item" v-for="item in searchList" :key="item.title" @click="jump2doc(item.path)">
+        <div class="item-info" >
+          <span v-html="highlightText(item.title, inputValue)" :title="item.title"></span>
         </div>
         <div class="item-icon">
           <ArrowIcon />
@@ -61,9 +68,7 @@ const highlightText = (text: any, keyword: any) => {
 <style scoped>
 * {
   white-space: nowrap;
-  /* 禁止换行 */
   overflow: hidden;
-  /* 隐藏溢出内容 */
   text-overflow: ellipsis;
   color: black;
 }
@@ -133,6 +138,12 @@ const highlightText = (text: any, keyword: any) => {
   margin: 0 auto;
 }
 
+.search-item:hover{
+  cursor: pointer;
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
+  box-shadow: 0 12px 20px -12px rgb(0 36 100 / 30%);
+}
 .item-icon {
   width: 32px;
 }
