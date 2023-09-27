@@ -4,10 +4,10 @@ const DocRouter = {
     'Web Devloper': {
         info: [
             {
-                path: '/tool11',
-                title: 'Nginx Setup for Web',
-                author: 'bwli',
-                date: '2022-01-01'
+                path: 'web/ipc/IPC.md',
+                title: 'IPC即插即用功能',
+                author: '冯军辉',
+                date: '2022-09-27'
             },
             {
                 path: '/tool',

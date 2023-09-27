@@ -52,6 +52,7 @@ const viteInfo = {
   height: calc(100vh - 100px);
   flex-direction: column;
   flex-wrap: wrap;
+  min-height: 800px;
 }
 
 .home-vite {

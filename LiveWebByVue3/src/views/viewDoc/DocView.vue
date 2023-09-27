@@ -1,28 +1,28 @@
 <script setup lang="ts">
 import SearchItem from '@/views/viewDoc/items/SearchItem.vue';
 import CategoryItem from '@/views/viewDoc/items/CategoryItem.vue';
-import DocItem from '@/views/viewDoc/items/DocItem.vue';
+import DocShowItem from '@/views/viewDoc/items/DocShowItem.vue';
 import { ref, watch } from 'vue';
-
+import {onMounted, onBeforeUnmount} from 'vue';
 const linkPath = ref('');
 const getPath = (path: string) => {
   linkPath.value = path;
 };
 
-interface docInfo {
+interface linkInfo {
   path: string;
   type: string;
 }
 
-const docInfo = ref<docInfo>({
+const docInfo = ref<linkInfo>({
   path: '',
   type: '',
 });
 
 const pathTypeCheck = (path: string) => {
-  let info: docInfo = {
+  let info: linkInfo = {
     path: '',
-    type: '',
+    type: ''
   };
   if (path.endsWith('.md')) {
     info.path = path;
@@ -35,32 +35,63 @@ watch(linkPath, (newValue) => {
   docInfo.value = pathTypeCheck(newValue);
 });
 
+const pageShowChange = ref(false);
+const handleAsyncComplete = (status: boolean) => {
+  pageShowChange.value = status;
+};
+
+const scrollPercentage = ref(0);
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    calculateScrollPercentage();
+  })
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', () => {
+    calculateScrollPercentage();
+  })
+})
+const calculateScrollPercentage = () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    scrollPercentage.value = Math.round((scrollTop / scrollHeight) * 100);
+}
 </script>
 
 <template>
-  <div class="doc" v-if="linkPath === ''">
-    <div class="doc-search">
-      <SearchItem :jump2doc="getPath"></SearchItem>
+  <div class="doc">
+    <div class="color-bar" :style="{ width: scrollPercentage + '%' }"></div>
+    <div class="doc-display" v-show="!pageShowChange">
+      <div class="doc-search">
+        <SearchItem :jump2doc="getPath"></SearchItem>
+      </div>
+      <div class="doc-page">
+        <CategoryItem :jump2doc="getPath"></CategoryItem>
+      </div>
     </div>
-    <div class="doc-page">
-      <CategoryItem :jump2doc="getPath"></CategoryItem>
+    <div class="doc-show" v-show="pageShowChange">
+      <DocShowItem :info="docInfo" @complete="handleAsyncComplete"></DocShowItem>
     </div>
   </div>
-  <DocItem :info="docInfo" v-if="linkPath !== ''"></DocItem>
 </template>
 
 <style scoped>
-* {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: black;
-}
-
 .doc {
   --v: 30px;
   --r: 0 3rem 0 3rem;
   position: relative;
+}
+
+.color-bar{
+  position: fixed;
+  top: 0;
+  height: 4px; 
+  z-index: 9999;
+  background-color: rgb(63, 253, 94);
+}
+
+.doc-display{
   padding: var(--r);
 }
 
@@ -70,8 +101,12 @@ watch(linkPath, (newValue) => {
 }
 
 .doc-page {
-  padding: var(--r);
   margin-top: var(--v);
+  padding: var(--r);
+}
+
+.doc-show{
+  padding: 2rem 6rem;
 }
 
 span[title] {
