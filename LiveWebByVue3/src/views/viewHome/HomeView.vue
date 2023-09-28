@@ -102,13 +102,7 @@ const viteInfo = {
   margin-right: calc(50% - 120px);
 }
 
-a {
-  font-size: 1.25rem;
-  margin-bottom: 0.4rem;
-  font-weight: bold;
-}
-
-a:hover::after {
+.home-vite a:hover::after {
   background: linear-gradient(to right, rgb(216, 22, 200), blue);
   animation: slideIn 0.5s linear forwards;
   content: '';
@@ -118,6 +112,13 @@ a:hover::after {
   width: 0;
   height: 3px;
 }
+
+a {
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+}
+
 
 @keyframes slideIn {
   0% {
